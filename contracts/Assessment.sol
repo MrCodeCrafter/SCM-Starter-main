@@ -57,4 +57,19 @@ contract Assessment {
         // emit the event
         emit Withdraw(_withdrawAmount);
     }
+
+     function transfer(address payable _to) public payable {
+        require(msg.sender == owner, "You are not the owner of this account");
+        require(balance >= 1 ether, "Insufficient balance to transfer 1 ETH");
+        
+        // Transfer 1 ETH
+        _to.transfer(1 ether);
+        
+        // Update balances
+        balance -= 1 ether;
+        
+        // Emit transfer event
+        emit Transfer(_to, 1 ether);
+    }
+
 }
